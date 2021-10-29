@@ -1,0 +1,63 @@
+class Matrix:
+    def __new__(cls, *args, **kwargs):
+        return super().__new__(cls)
+
+    def __init__(self, ma, mb):
+        self.ma = ma
+        self.mb = mb
+
+    def __gt__(self, other):
+        a1 = self.ma[0] * self.mb[1] - self.ma[1] * self.mb[0]
+        a2 = other.ma[0] * other.mb[1] - other.ma[1] * other.mb[0]
+        if a1 > a2:
+            return 1
+
+    def __lt__(self, other):
+        a1 = self.ma[0] * self.mb[1] - self.ma[1] * self.mb[0]
+        a2 = other.ma[0] * other.mb[1] - other.ma[1] * other.mb[0]
+        if a1 < a2:
+            return 1
+
+    def __eq__(self, other):
+        a1 = self.ma[0] * self.mb[1] - self.ma[1] * self.mb[0]
+        a2 = other.ma[0] * other.mb[1] - other.ma[1] * other.mb[0]
+        if a1 == a2:
+            return 1
+    def __ne__(self, other):
+        a1 = self.ma[0] * self.mb[1] - self.ma[1] * self.mb[0]
+        a2 = other.ma[0] * other.mb[1] - other.ma[1] * other.mb[0]
+        if a1 != a2:
+            return 1
+    
+    def __mul__(self, other):
+        res = []
+        for i in range (2):
+            res.append([0] * 2)
+        res[0] = self.ma[0] * other.ma[0] + self.ma[1] * other.mb[0]
+        res[1] = self.mb[0] * other.ma[1] + self.mb[1] * other.mb[1]
+        return res
+    
+    def __add__(self, other):
+        res = []
+        for i in range (2):
+            res.append([0] * 2)
+        res[0][0] = self.ma[0] + other.ma[0]
+        res[0][1] = self.ma[1] + other.ma[1]
+        res[1][0] = self.mb[0] + other.mb[0]
+        res[1][1] = self.mb[1] + other.mb[1]
+        return res
+
+m1 = Matrix([5,1],[2,2])
+m2 = Matrix([1,1],[3,4])
+
+if m1 > m2:
+    print ('>')
+if m1 < m2:
+    print ('<')
+if m1 == m2:
+    print ('==')
+if m1 != m2:
+    print ('!=')
+
+print(f'Умножение: {m1*m2}')
+print(f'Сложение: {m1+m2}')
